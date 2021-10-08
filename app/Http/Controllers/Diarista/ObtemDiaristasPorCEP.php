@@ -18,8 +18,6 @@ class ObtemDiaristasPorCEP extends Controller
      */
     public function __invoke(Request $request)
     {
-        $diaristas = User::diaristaAtendeCidade(1501451)->get();
-
-        return new DiaristaPublicoCollection($diaristas);
+        return new DiaristaPublicoCollection(User::diaristaDisponivelCidade(1506807), User::diaristasDisponivelCidadeTotal(1506807));
     }
 }

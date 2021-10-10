@@ -7,17 +7,27 @@ use App\Http\Resources\DiaristaPublico;
 use App\Http\Resources\DiaristaPublicoCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ObtemDiaristasPorCEP extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request)
     {
-        return new DiaristaPublicoCollection(User::diaristaDisponivelCidade(1506807), User::diaristasDisponivelCidadeTotal(1506807));
+        $cep = $request->cep;
+
+        $resposta = Http::get("https://viacep.com.br/ws/$cep/json/");
+
+        $dados = $resposta->json();
+
+        return new DiaristaPublicoCollection(
+            User::diaristaDisponivelCidade($dados['ibge']),
+            User::diaristasDisponivelCidadeTotal($dados['ibge'])
+        );
     }
 }

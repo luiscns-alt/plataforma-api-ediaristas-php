@@ -8,6 +8,7 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use ApiHandler;
     /**
      * A list of the exception types that are not reported.
      *
@@ -49,13 +50,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
         if ($request->is('api/*')) {
-            if ($e instanceof ValidationException) {
-                return response()->json([
-                    "status" => 400,
-                    "code" => "Validation_Error",
-                    "message" => "Erro de validaaçõa dos dados enviados"
-                ] + $e->errors(), 400);
-            }
+            return $this->getJsonException($e);
         }
         return parent::render($request, $e);
     }

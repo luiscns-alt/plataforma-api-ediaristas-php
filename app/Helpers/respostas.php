@@ -15,14 +15,14 @@ if (!function_exists('resposta_padrao')) {
     function resposta_padrao(
         string $message,
         string $code,
-        int $statusCode,
-        array $adicionais = []
-    ):JsonResponse
+        int    $statusCode,
+        array  $adicionais = []
+    ): JsonResponse
     {
         return response()->json([
-            "status" => $statusCode,
-            "code" => $code,
-            "message" => $message
-        ] + $adicionais, $statusCode);
+                "status" => $statusCode,
+                "code" => $code,
+                "message" => $message
+            ] + $adicionais, $statusCode);
     }
 }

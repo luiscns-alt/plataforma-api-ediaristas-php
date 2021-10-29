@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Diarista;
 
+use App\Actions\Diarista\ObterDiaristasPorCEP;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -19,21 +20,17 @@ class ObtemDiaristasPorCEP extends Controller
      * @param ConsultaCEPInterface $servicoCEP
      * @return DiaristaPublicoCollection|JsonResponse
      */
-    public function __invoke(Request $request,  ConsultaCEPInterface $servicoCEP): DiaristaPublicoCollection|JsonResponse
+    public function __invoke(Request $request, ObterDiaristasPorCEP $action): DiaristaPublicoCollection|JsonResponse
     {
         $request->validate([
             'cep' => ['required', 'numeric']
         ]);
 
-        $dados = $servicoCEP->buscar($request->cep);
-
-        if ($dados === false) {
-            throw ValidationException::withMessages(['cep' => 'CEP não encontrado']);
-        }
+        [$diaristasCollection, $quantidadeDiaristas] = $action->executar($request->cep);
 
         return new DiaristaPublicoCollection(
-            User::diaristaDisponivelCidade($dados->ibge),
-            User::diaristasDisponivelCidadeTotal($dados->ibge)
+            $diaristasCollection,
+            $quantidadeDiaristas
         );
     }
 }

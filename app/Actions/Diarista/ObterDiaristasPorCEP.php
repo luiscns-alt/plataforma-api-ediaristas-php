@@ -3,8 +3,8 @@
 namespace App\Actions\Diarista;
 
 use App\Models\User;
-use App\Services\ConsultaCEP\ConsultaCEPInterface;
 use Illuminate\Validation\ValidationException;
+use App\Services\ConsultaCEP\ConsultaCEPInterface;
 
 class ObterDiaristasPorCEP
 {
@@ -12,6 +12,12 @@ class ObterDiaristasPorCEP
         private ConsultaCEPInterface $servicoCEP
     ){}
 
+    /**
+     * Busca diaristas a partir de um CEP
+     *
+     * @param string $cep
+     * @return array
+     */
     public function executar(string $cep): array
     {
         $dados = $this->servicoCEP->buscar($cep);

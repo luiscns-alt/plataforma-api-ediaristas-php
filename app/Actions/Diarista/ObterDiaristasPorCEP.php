@@ -10,7 +10,8 @@ class ObterDiaristasPorCEP
 {
     public function __construct(
         private ConsultaCEPInterface $servicoCEP
-    ){}
+    ) {
+    }
 
     /**
      * Busca diaristas a partir de um CEP

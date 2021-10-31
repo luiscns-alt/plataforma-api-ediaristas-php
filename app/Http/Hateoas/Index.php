@@ -2,15 +2,8 @@
 
 namespace App\Http\Hateoas;
 
-class Index
+class Index extends HateoasBase implements HateoasInterface
 {
-    /**
-     * Links do Hateoas
-     *
-     * @var array
-     */
-    protected array $links = [];
-
     /**
      * Retonar o links do hateoas para a rota inicial
      *
@@ -24,27 +17,5 @@ class Index
         $this->adicionarLink("GET", "listar_servicos", "servicos.index");
 
         return $this->links;
-    }
-
-    /**
-     * Adiciona um link no Hateoas
-     *
-     * @param string $metodo
-     * @param string $descricao
-     * @param string $nomeRota
-     * @param array $parametrosRotas
-     * @return void
-     */
-    protected function adicionarLink(
-        string $metodo,
-        string $descricao,
-        string $nomeRota,
-        array $parametrosRotas = []
-    ) {
-        $this->links[] = [
-            "type" => $metodo,
-            "rel" => $descricao,
-            "uri" => route($nomeRota, $parametrosRotas),
-        ];
     }
 }

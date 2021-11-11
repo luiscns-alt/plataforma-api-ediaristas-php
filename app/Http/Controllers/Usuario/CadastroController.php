@@ -21,7 +21,11 @@ class CadastroController extends Controller
      */
     public function store(Request $request)
     {
-        $this->criarUsuario->executar();
+        $usuario = $this->criarUsuario->executar(
+            $request->except('password_confirmation'),
+            $request->foto_documento
+        );
+        return $usuario;
     }
 
     /**

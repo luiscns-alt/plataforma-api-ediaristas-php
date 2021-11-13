@@ -29,7 +29,12 @@ class AutenticacaoController extends Controller
         Auth::logout();
 
         return response()->json([
-            'message' => 'Successfully logged put'
+            'message' => 'Successfully logged out'
         ]);
+    }
+
+    public function refresh()
+    {
+        return response()->json(['access' => Auth::refresh()]);
     }
 }

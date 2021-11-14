@@ -11,10 +11,7 @@ use App\Http\Controllers\Usuario\CadastroController;
 
 Route::get('/', IndexController::class);
 
-Route::post('/token', [AutenticacaoController::class, 'login'])->name('autenticacao.login');
 Route::get('/me', [AutenticacaoController::class, 'me'])->name('usuario.show');
-Route::post('/logout', [AutenticacaoController::class, 'logout'])->name('autenticacao.logout');
-Route::post('/token/refresh', [AutenticacaoController::class, 'refresh'])->name('autenticacao.refresh');
 
 Route::get('/diaristas/localidades', ObtemDiaristasPorCEP::class)->name('diaristas.busca_por_cep');
 Route::get('/diaristas/disponibilidade', VerificaDisponibilidade::class)->name('enderecos.disponibilidade');

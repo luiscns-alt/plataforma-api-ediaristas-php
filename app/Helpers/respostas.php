@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('resposta_padrao')) {
     /**
@@ -17,12 +18,23 @@ if (!function_exists('resposta_padrao')) {
         string $code,
         int    $statusCode,
         array  $adicionais = []
-    ): JsonResponse
+    ): JsonResponse {
+        return response()->json([
+            "status" => $statusCode,
+            "code" => $code,
+            "message" => $message
+        ] + $adicionais, $statusCode);
+    }
+}
+
+if (!function_exists('resposta_token')) {
+    function resposta_token(string $token): JsonResponse
     {
         return response()->json([
-                "status" => $statusCode,
-                "code" => $code,
-                "message" => $message
-            ] + $adicionais, $statusCode);
+            "access" => $token,
+            "refresh" => $token,
+            "token_type" => 'bearer',
+            "expires_in" => Auth::factory()->getTTL() * 60
+        ]);
     }
 }

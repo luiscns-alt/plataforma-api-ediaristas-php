@@ -16,7 +16,7 @@ class AutenticacaoController extends Controller
             return response()->json(['error' => 'Unathorized'], 401);
         }
 
-        return response()->json(['access' => $token]);
+        return resposta_token($token);
     }
 
     public function me()
@@ -35,6 +35,6 @@ class AutenticacaoController extends Controller
 
     public function refresh()
     {
-        return response()->json(['access' => Auth::refresh()]);
+        return resposta_token(Auth::refresh());
     }
 }

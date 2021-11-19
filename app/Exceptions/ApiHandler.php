@@ -5,7 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
-
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 
 trait ApiHandler
 {
@@ -22,7 +22,11 @@ trait ApiHandler
         }
 
         if ($e instanceof AuthenticationException) {
-            return $this->AuthenticationException($e);
+            return $this->authenticationException($e);
+        }
+
+        if ($e instanceof TokenBlacklistedException) {
+            return $this->authenticationException($e);
         }
 
         return $this->genericException($e);
@@ -50,8 +54,9 @@ trait ApiHandler
      * @param AuthenticationException $e
      * @return JsonResponse
      */
-    protected function authenticationException(AuthenticationException $e): JsonResponse
-    {
+    protected function authenticationException(
+        AuthenticationException|TokenBlacklistedException $e
+    ): JsonResponse {
         return resposta_padrao($e->getMessage(), 'token_not_valid', 401);
     }
 

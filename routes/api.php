@@ -11,7 +11,9 @@ use App\Http\Controllers\Usuario\CadastroController;
 
 Route::get('/', IndexController::class);
 
-Route::get('/me', [AutenticacaoController::class, 'me'])->name('usuario.show');
+Route::get('/me', [AutenticacaoController::class, 'me'])
+    ->middleware('auth:api')
+    ->name('usuario.show');
 
 Route::get('/diaristas/localidades', ObtemDiaristasPorCEP::class)->name('diaristas.busca_por_cep');
 Route::get('/diaristas/disponibilidade', VerificaDisponibilidade::class)->name('enderecos.disponibilidade');

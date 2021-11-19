@@ -16,6 +16,10 @@ class Index extends HateoasBase implements HateoasInterface
         $this->adicionarLink("GET", "endereco_cep", "enderecos.cep");
         $this->adicionarLink("GET", "listar_servicos", "servicos.index");
 
+        $this->adicionarLink('POST', "cadastrar_usuario", "usuarios.create");
+        $this->adicionarLink('POST', "login", 'autenticacao.login');
+        $this->adicionarLink("GET", "usuario_logado", "usuarios.show");
+
         return $this->links;
     }
 }

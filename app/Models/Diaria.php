@@ -10,7 +10,7 @@ class Diaria extends Model
     use HasFactory;
 
     /**
-     * Campos bloqueados na defini~çao de dados em massa.
+     * Campos bloqueados na definição de dados em massa.
      */
     protected $guarded = ['motivo_cancelamento', 'created_at', 'updated_at'];
 }

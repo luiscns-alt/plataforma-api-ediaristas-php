@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Rules\HoraFinalDiaria;
 use App\Rules\HoraInicioDiaria;
+use App\Rules\TempoAtendimentoDiaria;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DiariaRequest extends FormRequest
@@ -34,7 +35,8 @@ class DiariaRequest extends FormRequest
                 'required',
                 'int',
                 'max:8',
-                new HoraFinalDiaria($this)
+                new HoraFinalDiaria($this),
+                new TempoAtendimentoDiaria($this)
             ],
             "preco" => ['required'],
 

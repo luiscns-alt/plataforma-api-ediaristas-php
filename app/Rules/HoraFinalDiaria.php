@@ -13,9 +13,7 @@ class HoraFinalDiaria implements Rule
      *
      * @return void
      */
-    public function __construct(
-        private Request $request
-    ) 
+    public function __construct(private Request $request)
     {
         //
     }

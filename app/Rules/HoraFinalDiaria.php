@@ -15,7 +15,8 @@ class HoraFinalDiaria implements Rule
      */
     public function __construct(
         private Request $request
-    ) {
+    ) 
+    {
         //
     }
 

@@ -21,10 +21,11 @@ class CadastroController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  DiariaRequest  $request
-     * @return \Illuminate\Http\Response
+     * Grava uma nova diaria no banco de dados
+     * @param DiariaRequest $request
+     * @param CriarDiaria $criarDiaria
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(DiariaRequest $request, CriarDiaria $criarDiaria)
     {

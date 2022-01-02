@@ -70,7 +70,7 @@ trait ApiHandler
     }
 
     /**
-     * Undocumented function
+     * Retorna uma resposta para o erro de autorização
      *
      * @param AuthorizationException $e
      * @return JsonResponse

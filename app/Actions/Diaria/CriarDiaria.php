@@ -16,12 +16,12 @@ class CriarDiaria
     }
 
     /**
-     * Cria a diária no banco de dados
-     *
+     * Cria diária no banco de dados
      * @param array $dados
-     * @return void
+     * @return Diaria
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function executar(array $dados)
+    public function executar(array $dados): Diaria
     {
         Gate::authorize('tipo-cliente');
 

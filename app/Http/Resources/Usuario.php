@@ -12,14 +12,14 @@ class Usuario extends JsonResource
         $resource,
         private string $token = ''
     ) {
-        parent::__construct($resource, $token);
+        parent::__construct($resource);
     }
 
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
      */
     public function toArray($request): array
     {
@@ -39,13 +39,13 @@ class Usuario extends JsonResource
 
         if ($this->token !== '') {
             return $formato + [
-                    "token" => [
-                        "access" => $this->token,
-                        "refresh" => $this->token,
-                        "token_type" => "bearer",
-                        "expires_in" => Auth::factory()->getTTL() * 60,
-                    ]
-                ];
+                "token" => [
+                    "access" => $this->token,
+                    "refresh" => $this->token,
+                    "token_type" => "bearer",
+                    "expires_in" => Auth::factory()->getTTL() * 60
+                ]
+            ];
         }
 
         return $formato;

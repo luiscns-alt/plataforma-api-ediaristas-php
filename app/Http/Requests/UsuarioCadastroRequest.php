@@ -26,15 +26,15 @@ class UsuarioCadastroRequest extends FormRequest
     public function rules(): array
     {
         $regras = [
-            'nome_completo' => ['required', 'min:5', 'max:255'],
-            'cpf' => ['required', 'unique:users,cpf', 'cpf'],
-            'nascimento' => ['required', 'date', new IdadeMinima],
-            'foto_documento' => ['required', 'image'],
-            'telefone' => ['required', 'size:11'],
-            'tipo_usuario' => ['required', Rule::in([1, 2])],
-            'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'confirmed'],
-            'password_confirmation' => ['required']
+            "nome_completo" => ["required", "min:5", "max:255"],
+            "cpf" => ["required", "unique:users,cpf", "cpf"],
+            "nascimento" => ["required", "date", new IdadeMinima],
+            "foto_documento" => ["required", "image"],
+            "telefone" => ["required", 'size:11'],
+            "tipo_usuario" => ["required", Rule::in([1, 2])],
+            "email" => ["required", "email", "unique:users,email"],
+            "password" => ["required", "confirmed"],
+            "password_confirmation" => ["required"]
         ];
 
         $regraPix = [];

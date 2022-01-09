@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Diaria extends HateoasBase implements HateoasInterface
 {
 
+    /**
+     * Retorna os links do Hateoas para a diária
+     *
+     * @param Model|null $diaria
+     * @return array
+     */
     public function links(?Model $diaria): array
     {
         if ($diaria->status == 1) {

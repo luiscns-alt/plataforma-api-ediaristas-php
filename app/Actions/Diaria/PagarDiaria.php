@@ -12,6 +12,7 @@ class PagarDiaria
     {
         $this->validaStatusDiaria($diaria);
         Gate::authorize('tipo-cliente');
+        Gate::authorize('dono-diaria', $diaria);
 
         /**
          * Integração com o gateway de pagamento
